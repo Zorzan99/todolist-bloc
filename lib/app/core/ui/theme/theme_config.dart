@@ -7,9 +7,9 @@ class ThemeConfig {
   ThemeConfig._();
 
   static final _defaultInputBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(7),
+    borderRadius: BorderRadius.circular(30),
     borderSide: BorderSide(
-      color: Colors.grey[400]!,
+      color: ColorsApp.i.primary,
     ),
   );
   static final theme = ThemeData(
