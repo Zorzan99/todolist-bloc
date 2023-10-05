@@ -14,12 +14,11 @@ class ThemeConfig {
   );
   static final theme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
+    appBarTheme: AppBarTheme(
+      backgroundColor: ColorsApp.i.primary,
       elevation: 0,
-      centerTitle: true,
-      iconTheme: IconThemeData(
-        color: Colors.black,
+      iconTheme: const IconThemeData(
+        color: Colors.white,
       ),
     ),
     textTheme: GoogleFonts.mandaliTextTheme(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:todolist/app/modules/splash/widgets/logo.dart';
-import 'package:todolist/app/modules/splash/widgets/todo_list_form_field.dart';
+import 'package:todolist/app/core/ui/widgets/logo.dart';
+import 'package:todolist/app/core/ui/widgets/todo_list_form_field.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -78,7 +78,9 @@ class _SplashPageState extends State<SplashPage> {
                                                 20),
                                       ),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/register');
+                                    },
                                     child: const Padding(
                                       padding: EdgeInsets.all(10.0),
                                       child: Text('Login'),
