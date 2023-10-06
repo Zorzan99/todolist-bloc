@@ -6,18 +6,24 @@ class TodoListFormField extends StatelessWidget {
   final bool obscureText;
   final IconData? icon;
   final VoidCallback? onPressed;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
   const TodoListFormField({
     Key? key,
     required this.label,
     this.obscureText = false,
     this.icon,
     this.onPressed,
+    this.controller,
+    this.validator,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: obscureText,
+      validator: validator,
+      controller: controller,
       decoration: InputDecoration(
         labelText: label,
         labelStyle: const TextStyle(

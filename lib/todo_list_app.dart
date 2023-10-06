@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/app/core/ui/theme/theme_config.dart';
-import 'package:todolist/app/modules/home/register_page.dart';
-import 'package:todolist/app/modules/splash/splash_page.dart';
+import 'package:todolist/app/modules/home/register_router.dart';
+import 'package:todolist/app/modules/login/login_router.dart';
 
 class TodoListApp extends StatelessWidget {
   const TodoListApp({super.key});
@@ -12,8 +12,8 @@ class TodoListApp extends StatelessWidget {
       title: 'TodoList',
       theme: ThemeConfig.theme,
       routes: {
-        '/': (context) => const SplashPage(),
-        '/register': (context) => const RegisterPage(),
+        '/': (context) => LoginRouter.page,
+        '/register': (context) => RegisterRouter.page,
       },
     );
   }

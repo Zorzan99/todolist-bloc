@@ -3,14 +3,14 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:todolist/app/core/ui/widgets/logo.dart';
 import 'package:todolist/app/core/ui/widgets/todo_list_form_field.dart';
 
-class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  State<LoginPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends State<LoginPage> {
   bool _isPasswordVisible = false;
 
   void _togglePasswordVisibility() {
@@ -78,9 +78,7 @@ class _SplashPageState extends State<SplashPage> {
                                                 20),
                                       ),
                                     ),
-                                    onPressed: () {
-                                      Navigator.pushNamed(context, '/register');
-                                    },
+                                    onPressed: () {},
                                     child: const Padding(
                                       padding: EdgeInsets.all(10.0),
                                       child: Text('Login'),
@@ -122,7 +120,9 @@ class _SplashPageState extends State<SplashPage> {
                                 children: [
                                   const Text('Não possui conta?'),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/register');
+                                    },
                                     child: const Text(
                                       'Cadastre-se',
                                       style: TextStyle(
