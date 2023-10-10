@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/app/core/ui/theme/theme_config.dart';
 import 'package:todolist/app/modules/home/register_router.dart';
+import 'package:todolist/app/modules/home_page.dart';
 import 'package:todolist/app/modules/login/login_router.dart';
 
 class TodoListApp extends StatelessWidget {
@@ -14,6 +15,7 @@ class TodoListApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginRouter.page,
         '/register': (context) => RegisterRouter.page,
+        '/home': (context) => const HomePage(),
       },
     );
   }

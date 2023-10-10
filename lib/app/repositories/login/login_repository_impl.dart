@@ -33,7 +33,7 @@ class LoginRepositoryImpl implements LoginRepository {
   @override
   Future<User?> loginFirebase(String email, String password) async {
     try {
-      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+      final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       return userCredential.user;
     } on PlatformException catch (e, s) {

@@ -37,9 +37,23 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterController> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegisterController, RegisterState>(
-      builder: (context, state) {
-        return Scaffold(
+    return BlocListener<RegisterController, RegisterState>(
+        listener: (context, state) {
+          state.status.matchAny(
+            any: () => hideLoader(),
+            register: () => showLoader(),
+            error: () {
+              hideLoader();
+              showError('Erro ao registrar usuário');
+            },
+            success: () {
+              hideLoader();
+              showSuccess('Cadastro realizado com sucesso');
+              Navigator.pop(context);
+            },
+          );
+        },
+        child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: const Column(
@@ -94,7 +108,7 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterController> {
                       TodoListFormField(
                         controller: _passwordEC,
                         validator: Validatorless.multiple([
-                          Validatorless.required('Email obrigatório'),
+                          Validatorless.required('Senha obrigatória'),
                           Validatorless.min(
                               6, 'Senha deve conter pelo menos 6 caracteres')
                         ]),
@@ -149,8 +163,6 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterController> {
               )
             ],
           ),
-        );
-      },
-    );
+        ));
   }
 }
