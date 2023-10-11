@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todolist/app/core/ui/helpers/size_extensions.dart';
 import 'package:todolist/app/core/ui/widgets/logo.dart';
 import 'package:todolist/app/core/ui/widgets/todo_list_form_field.dart';
-import 'package:todolist/app/modules/home/register_controller.dart';
-import 'package:todolist/app/modules/home/register_state.dart';
+import 'package:todolist/app/modules/register/register_controller.dart';
+import 'package:todolist/app/modules/register/register_state.dart';
 import 'package:validatorless/validatorless.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -113,7 +113,7 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterController> {
                               6, 'Senha deve conter pelo menos 6 caracteres')
                         ]),
                         label: 'Senha',
-                        obscureText: _isPasswordVisible,
+                        obscureText: !_isPasswordVisible,
                         icon: _isPasswordVisible
                             ? Icons.visibility
                             : Icons.visibility_off,
@@ -127,7 +127,7 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterController> {
                           Validatorless.compare(
                               _passwordEC, 'Senhas diferentes'),
                         ]),
-                        obscureText: _isPasswordVisible,
+                        obscureText: !_isPasswordVisible,
                         icon: _isPasswordVisible
                             ? Icons.visibility
                             : Icons.visibility_off,

@@ -13,9 +13,6 @@ class LoginServiceImpl implements LoginService {
   Future<UserCredential> login() => _loginRepository.login();
 
   @override
-  Future<void> logout() => _loginRepository.logout();
-
-  @override
   Future<User?> register(String email, String password) =>
       _loginRepository.loginFirebase(email, password);
 }

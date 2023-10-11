@@ -44,7 +44,7 @@ class _SplashPageState extends BaseState<LoginPage, LoginController> {
           },
           success: () {
             hideLoader();
-            showInfo('Login Efetuado com sucesso');
+            showSuccess('Login Efetuado com sucesso');
             Navigator.pushNamedAndRemoveUntil(
                 context, '/home', (route) => false);
           },
@@ -88,10 +88,11 @@ class _SplashPageState extends BaseState<LoginPage, LoginController> {
                                   const SizedBox(height: 20),
                                   TodoListFormField(
                                     controller: _passwordEC,
+
                                     label: 'Senha',
                                     validator: Validatorless.required(
                                         'Senha obrigatória'),
-                                    obscureText: _isPasswordVisible,
+                                    obscureText: !_isPasswordVisible,
                                     icon: _isPasswordVisible
                                         ? Icons.visibility
                                         : Icons.visibility_off,

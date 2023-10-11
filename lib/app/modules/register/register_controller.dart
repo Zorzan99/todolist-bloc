@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:todolist/app/modules/home/register_state.dart';
+import 'package:todolist/app/modules/register/register_state.dart';
 import 'package:todolist/app/repositories/register/register_repository.dart';
 
 class RegisterController extends Cubit<RegisterState> {
