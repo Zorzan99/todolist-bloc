@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todolist/app/core/ui/base_state/base_state.dart';
+import 'package:todolist/app/models/task_model.dart';
 import 'package:todolist/app/modules/home/home_controller.dart';
 import 'package:todolist/app/modules/home/home_state.dart';
 
@@ -16,13 +17,18 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final user = FirebaseAuth.instance.currentUser;
+  @override
+  void initState() {
+    super.initState();
+    controller.fetchTasks(user!.uid);
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<HomeController, HomeState>(
       listener: (context, state) {
-        state.status.matchAny(
-          any: () => hideLoader(),
+        print(state);
+        state.status.match(
           inital: () {},
           loading: () {
             showLoader();
@@ -34,13 +40,13 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
             showError('Erro ao adicionar tarefa');
           },
           addingTask: () {
-            showLoader();
+            _titleController.clear();
+            _descriptionController.clear();
           },
           taskAdded: () {
-            hideLoader();
+            showLoader();
             showSuccess('Tarefa adicionada com sucesso');
-            _titleController.clear(); // Limpa o campo de título
-            _descriptionController.clear(); // Limpa o campo de descrição
+            hideLoader();
           },
           taskUpdated: () {},
           taskDeleted: () {},
@@ -107,27 +113,33 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () => controller.addTask(
-                    _titleController.text, _descriptionController.text),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadiusDirectional.circular(20),
-                  ),
-                ),
-                child: const Text('Adicionar tarefa'),
+                onPressed: () {
+                  String userId = FirebaseAuth.instance.currentUser!.uid;
+
+                  if (_titleController.text.isNotEmpty &&
+                      _descriptionController.text.isNotEmpty) {
+                    final TaskModel taskModel = TaskModel(
+                      title: _titleController.text,
+                      description: _descriptionController.text,
+                    );
+                    controller.addTask(userId, taskModel);
+                  }
+                },
+                child: const Text('Adicionar Tarefa'),
               ),
               const SizedBox(height: 16),
-              BlocBuilder<HomeController, HomeState>(
-                builder: (context, state) {
+              BlocSelector<HomeController, HomeState, List<TaskModel>>(
+                builder: (context, tasks) {
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: state.tasks.length,
+                      itemCount: tasks.length,
                       itemBuilder: (context, index) {
-                        final task = state.tasks[index];
+                        final task = tasks[index];
                         return Card(
                           elevation: 2,
                           margin: const EdgeInsets.symmetric(vertical: 8),
                           child: ListTile(
+                            onTap: () {},
                             title: Text(task.title),
                             subtitle: Text(task.description),
                           ),
@@ -135,6 +147,9 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                       },
                     ),
                   );
+                },
+                selector: (state) {
+                  return state.tasks;
                 },
               )
             ],

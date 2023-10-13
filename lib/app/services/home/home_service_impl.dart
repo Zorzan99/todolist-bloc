@@ -10,6 +10,10 @@ class HomeServiceImpl implements HomeService {
   Future<void> logout() => _homeRepository.logout();
 
   @override
-  TaskModel? addTask(String title, String description) =>
-      _homeRepository.addTask(title, description);
+  Future<TaskModel> addTask(String userId, TaskModel taskModel) =>
+      _homeRepository.addTask(userId, taskModel);
+
+  @override
+  Future<List<TaskModel>> getFavoritesMovies(String userId) =>
+      _homeRepository.getFavoritesMovies(userId);
 }

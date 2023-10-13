@@ -31,6 +31,7 @@ class _SplashPageState extends BaseState<LoginPage, LoginController> {
   Widget build(BuildContext context) {
     return BlocListener<LoginController, LoginState>(
       listener: (context, state) {
+        print(state);
         state.status.matchAny(
           any: () => hideLoader(),
           login: () => showLoader(),
